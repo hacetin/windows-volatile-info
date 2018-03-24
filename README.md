@@ -32,7 +32,7 @@ PS C:\Users\user> Get-Content .\main.ps1 | PowerShell.exe -noprofile -
 ```
 PS C:\Users\user> git clone https://github.com/hacetin/WindowsVolatileInfo.git
 PS C:\Users\user> cd .\WindowsVolatileInfo\
-PS C:\Users\user> Get-Content .\main.ps1 | PowerShell.exe -noprofile -
+PS C:\Users\user\WindowsVolatileInfo> Get-Content .\main.ps1 | PowerShell.exe -noprofile -
 ```
 
 ## Example Report Format
