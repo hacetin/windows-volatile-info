@@ -53,14 +53,15 @@ Append-File("VISIBLE NETWORKS")
 netsh wlan show networks | Out-File -Append $OutputFileName
 
 Append-File("ACTIVE TCP/UDP CONNECTIONS")
-Try
+Print-Host-Info "Getting Active TCP/UDP Connections with Application Names"
+If(([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()`
+    ).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
-    Print-Host-Info "Getting Active TCP/UDP Connections with Application Names"
     netstat -anob | Out-File -Append $OutputFileName
 }
-Catch # If there is no permission for -b parameter
+Else # If there is no permission for -b parameter
 {
-    Write-Host -ForegroundColor RED "FAILED. Most probably, you don't have the permission."
+    Write-Host -ForegroundColor RED "You don't have admin credentials."
     Print-Host-Info "Getting Active TCP/UDP Connections"
     netstat -ano | Out-File -Append $OutputFileName
 }
