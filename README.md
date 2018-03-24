@@ -24,7 +24,7 @@ PS C:\Users\user> .\main.ps1
 You can by-pass execution policy with 
 
 ```
-PS C:\Users\user> Get-Content .\main.ps1 | PowerShell.exe -noprofile -
+PS C:\Users\user> PowerShell.exe -ExecutionPolicy Bypass -File .runme.ps1
 ```
  
 ### All commands for download(clone) and run
@@ -32,7 +32,7 @@ PS C:\Users\user> Get-Content .\main.ps1 | PowerShell.exe -noprofile -
 ```
 PS C:\Users\user> git clone https://github.com/hacetin/WindowsVolatileInfo.git
 PS C:\Users\user> cd .\WindowsVolatileInfo\
-PS C:\Users\user\WindowsVolatileInfo> Get-Content .\main.ps1 | PowerShell.exe -noprofile -
+PS C:\Users\user\WindowsVolatileInfo> PowerShell.exe -ExecutionPolicy Bypass -File .runme.ps1
 ```
 
 ## Example Report Format
