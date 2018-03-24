@@ -19,7 +19,21 @@ Run **main.ps1** as normal powershell script
 
 ```
 PS C:\Users\user> .\main.ps1
-``` 
+```
+
+You can by-pass execution policy with 
+
+```
+PS C:\Users\user> Get-Content .\main.ps1 | PowerShell.exe -noprofile -
+```
+ 
+### All commands for download(clone) and run
+
+```
+PS C:\Users\user> git clone https://github.com/hacetin/WindowsVolatileInfo.git
+PS C:\Users\user> cd .\WindowsVolatileInfo\
+PS C:\Users\user> Get-Content .\main.ps1 | PowerShell.exe -noprofile -
+```
 
 ## Example Report Format
 
