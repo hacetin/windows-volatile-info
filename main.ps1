@@ -13,6 +13,44 @@ Active TCP/UDP Connections
 
 #>
 
+#If powershell version lower than 3, define some functions
+If(test-path variable:psversiontable -And $psversiontable.psversion.Major -lt 3) 
+{
+    # Source: https://gallery.technet.microsoft.com/scriptcenter/ad12dc1c-b0c7-44d6-97c7-1a537b0b4fef
+    Function Get-DnsClientCache{ 
+    $DNSCache = @() 
+     
+    Invoke-Expression "IPConfig /DisplayDNS" | 
+    Select-String -Pattern "Record Name" -Context 0,5 | 
+        %{ 
+            $Record = New-Object PSObject -Property @{ 
+            Name=($_.Line -Split ":")[1] 
+            Type=($_.Context.PostContext[0] -Split ":")[1] 
+            TTL=($_.Context.PostContext[1] -Split ":")[1] 
+            Length=($_.Context.PostContext[2] -Split ":")[1] 
+            Section=($_.Context.PostContext[3] -Split ":")[1] 
+            HostRecord=($_.Context.PostContext[4] -Split ":")[1] 
+            } 
+            $DNSCache +=$Record 
+        } 
+        return $DNSCache 
+    }
+
+    #Source: http://www.nivot.org/post/2009/10/14/PowerShell20GettingAndSettingTextToAndFromTheClipboard
+    function Get-Clipboard {
+            $command = {
+                    add-type -an system.windows.forms
+                    [System.Windows.Forms.Clipboard]::GetText()
+            }
+            powershell -sta -noprofile -command $command
+    }
+
+    function Get-NetNeighbor { 
+        $ARPCache = arp -a
+        return $ARPCache
+    }
+} 
+
 $Timestamp = Get-Date -UFormat "%Y%m%d_%H%M%S_%Z"
 $OutputFileName = "Windows_Volatile_Information_Report_" + $Timestamp + ".txt"
 

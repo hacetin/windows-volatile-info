@@ -15,6 +15,9 @@ If you have admin credentials, Active TCP/UDP Connections will have application 
 
 
 ## Usage
+
+This script is compatible Powershell 2.0 and higher versions.
+
 Run **main.ps1** as normal powershell script 
 
 ```
@@ -36,6 +39,8 @@ PS C:\Users\user\WindowsVolatileInfo> PowerShell.exe -ExecutionPolicy Bypass -Fi
 ```
 
 ## Example Report Format
+
+This is an example report format for a Windows 10 machine with Powershell 5.1
 
 **Windows_Volatile_Information_Report_(Start_Timestamp).txt**
 
