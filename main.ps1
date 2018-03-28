@@ -14,7 +14,7 @@ Active TCP/UDP Connections
 #>
 
 #If powershell version lower than 3, define some functions
-If(test-path variable:psversiontable -And $psversiontable.psversion.Major -lt 3) 
+If(Test-Path Variable:PSVersionTable -And $PSVersionTable.PSVersion.Major -lt 3) 
 {
     # Source: https://gallery.technet.microsoft.com/scriptcenter/ad12dc1c-b0c7-44d6-97c7-1a537b0b4fef
     Function Get-DnsClientCache{ 
@@ -33,11 +33,11 @@ If(test-path variable:psversiontable -And $psversiontable.psversion.Major -lt 3)
             } 
             $DNSCache +=$Record 
         } 
-        return $DNSCache 
+        Return $DNSCache 
     }
 
     #Source: http://www.nivot.org/post/2009/10/14/PowerShell20GettingAndSettingTextToAndFromTheClipboard
-    function Get-Clipboard {
+    Function Get-Clipboard {
             $command = {
                     add-type -an system.windows.forms
                     [System.Windows.Forms.Clipboard]::GetText()
@@ -45,61 +45,61 @@ If(test-path variable:psversiontable -And $psversiontable.psversion.Major -lt 3)
             powershell -sta -noprofile -command $command
     }
 
-    function Get-NetNeighbor { 
+    Function Get-NetNeighbor { 
         $ARPCache = arp -a
         return $ARPCache
     }
 } 
 
 $Timestamp = Get-Date -UFormat "%Y%m%d_%H%M%S_%Z"
-$OutputFileName = "Windows_Volatile_Information_Report_" + $Timestamp + ".txt"
+$OutputFileName = ".\Windows_Volatile_Information_Report_" + $Timestamp + ".txt"
 
 #Prints text to the host as green colored 
-function Print-Host-Info($Text) {Write-Host -ForegroundColor GREEN $Text}
+Function Print-Host-Info($Text) {Write-Host -ForegroundColor GREEN $Text}
 
 #Appends text to output file defined above
-function Append-File($Text) {$Text.ToUpper() | Out-File -Append $OutputFileName}
+Function Append-File($Text) {$Text.ToUpper() | Out-File -Append $OutputFileName}
 
 Print-Host-Info "...Starting Volatile Informations Script..."
 
-Append-File("WINDOWS VOLATILE INFORMATION REPORT`n`n")
+Append-File "WINDOWS VOLATILE INFORMATION REPORT`n`n"
 
 Print-Host-Info "Getting System Processes"
-Append-File("SYSTEM PROCESSES")
-Get-Process | Format-Table -AutoSize -Wrap | Out-File -Append $OutputFileName
+Append-File "SYSTEM PROCESSES"
+Get-Process | Format-Table -AutoSize -Wrap | Out-File -Append -FilePath $OutputFileName
 
 Print-Host-Info "Getting Running Services"
-Append-File("RUNNING SERVICES")
+Append-File "RUNNING SERVICES"
 Get-Service | Where-Object {$_.Status -eq "Running"} | Format-Table -AutoSize -Wrap | 
-    Out-File -Append $OutputFileName
+    Out-File -Append -FilePath $OutputFileName
 
 Print-Host-Info "Getting DNS Client Cache"
-Append-File("DNS CLIENT CACHE")
-Get-DnsClientCache | Format-Table -AutoSize -Wrap | Out-File -Append $OutputFileName
+Append-File "DNS CLIENT CACHE"
+Get-DnsClientCache | Format-Table -AutoSize -Wrap | Out-File -Append -FilePath $OutputFileName
 
 Print-Host-Info "Getting ARP Cache"
-Append-File("ARP CACHE")
-Get-NetNeighbor | Format-Table -AutoSize -Wrap | Out-File -Append $OutputFileName
+Append-File "ARP CACHE"
+Get-NetNeighbor | Format-Table -AutoSize -Wrap | Out-File -Append -FilePath $OutputFileName
 
 Print-Host-Info "Getting Clipboard Information"
-Append-File("CLIPBOARD INFORMATION`n")
-Get-Clipboard | Out-File -Append $OutputFileName
-Append-File("`n")
+Append-File "CLIPBOARD INFORMATION`n"
+Get-Clipboard | Out-File -Append -FilePath $OutputFileName
+Append-File "`n"
 
 Print-Host-Info "Getting Visible Networks"
-Append-File("VISIBLE NETWORKS")
-netsh wlan show networks | Out-File -Append $OutputFileName
+Append-File "VISIBLE NETWORKS"
+netsh wlan show networks | Out-File -Append -FilePath $OutputFileName
 
-Append-File("ACTIVE TCP/UDP CONNECTIONS")
+Append-File "ACTIVE TCP/UDP CONNECTIONS"
 Print-Host-Info "Getting Active TCP/UDP Connections with Application Names"
 If(([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()`
     ).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
-    netstat -anob | Out-File -Append $OutputFileName
+    netstat -anob | Out-File -Append -FilePath $OutputFileName
 }
 Else # If there is no permission for -b parameter
 {
     Write-Host -ForegroundColor RED "You don't have admin credentials."
     Print-Host-Info "Getting Active TCP/UDP Connections"
-    netstat -ano | Out-File -Append $OutputFileName
+    netstat -ano | Out-File -Append -FilePath $OutputFileName
 }
