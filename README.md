@@ -16,7 +16,8 @@ If you have admin credentials, Active TCP/UDP Connections will have application 
 
 ## Usage
 
-This script is compatible Powershell 2.0 and higher versions.
+This script is compatible Powershell 2.0 and higher versions. (This script is not tried at Powershell 1.0)
+**Get-DnsClientCache, Get-NetNeighbor and Get-Clipboard** functions are defined after Powershell 3.0. If the Powershell version is greater than or equal to 3, the script uses predefined Powershell functions. But if Powershell version is lower than 3, the script uses its own functions.
 
 Run **main.ps1** as normal powershell script 
 
