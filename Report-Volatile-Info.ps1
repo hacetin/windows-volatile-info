@@ -16,7 +16,7 @@
     Active TCP/UDP Connections
     
 .EXAMPLE
-    ./main.ps1
+    ./Report-Volatile-Info.ps1
 
 #>
 

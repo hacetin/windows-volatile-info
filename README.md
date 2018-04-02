@@ -32,19 +32,19 @@ To by-pass execution policy, read the Usage part.
 Use "Get-Help" to see description and example in the host if the Scope is set Process.
 
 ```
-PS C:\Users\user> Get-Help.\main.ps1
+PS C:\Users\user> Get-Help.\Report-Volatile-Info.ps1
 ```
 
-Run **main.ps1** as a normal Powershell script 
+Run **Report-Volatile-Info.ps1** as a normal Powershell script 
 
 ```
-PS C:\Users\user> .\main.ps1
+PS C:\Users\user> .\Report-Volatile-Info.ps1
 ```
 
 To by-pass execution policy, use
 
 ```
-PS C:\Users\user> PowerShell.exe -ExecutionPolicy Bypass -File .\main.ps1 
+PS C:\Users\user> PowerShell.exe -ExecutionPolicy Bypass -File .\Report-Volatile-Info.ps1 
 ```
  
 ### All commands for download(clone) and run
@@ -52,7 +52,7 @@ PS C:\Users\user> PowerShell.exe -ExecutionPolicy Bypass -File .\main.ps1
 ```
 PS C:\Users\user> git clone https://github.com/hacetin/WindowsVolatileInfo.git
 PS C:\Users\user> cd .\WindowsVolatileInfo\
-PS C:\Users\user\WindowsVolatileInfo> PowerShell.exe -ExecutionPolicy Bypass -File .\main.ps1
+PS C:\Users\user\WindowsVolatileInfo> PowerShell.exe -ExecutionPolicy Bypass -File .\Report-Volatile-Info.ps1
 ```
 
 ## Example Report Format
