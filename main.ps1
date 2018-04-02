@@ -1,15 +1,22 @@
 <#
 
-This script collects volatile informations in Windows OS and print them to file
-named "Windows_Volatile_Information_Report_<Timestamp>" with the headers below.
+.SYNOPSIS
+    This script collects volatile informations in Windows OS.
 
-System Processes
-Running Services
-DNS Client Cache
-ARP Cache
-Clipboard Information
-Visible Networks
-Active TCP/UDP Connections
+.DESCRIPTION
+    This script collects volatile informations in Windows OS and print them to file
+    named "Windows_Volatile_Information_Report_<Timestamp>.txt" with the headers below.
+
+    System Processes
+    Running Services
+    DNS Client Cache
+    ARP Cache
+    Clipboard Information
+    Visible Networks
+    Active TCP/UDP Connections
+    
+.EXAMPLE
+    ./main.ps1
 
 #>
 

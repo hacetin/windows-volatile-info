@@ -10,25 +10,41 @@ Clipboard Information
 Visible Networks
 Active TCP/UDP Connections 
 
-**NOTE:**
-If you have admin credentials, Active TCP/UDP Connections will have application names.
+**NOTE 1:**
+If the host has admin credentials, Active TCP/UDP Connections will have application names.
 
+**NOTE 2:**
+This script is compatible Powershell 2.0 and higher versions. (This script is not tried at Powershell 1.0) **Get-DnsClientCache, Get-NetNeighbor and Get-Clipboard** functions are defined after Powershell 3.0. If the Powershell version is greater than or equal to 3, the script uses predefined Powershell functions. But if Powershell version is lower than 3, the script uses its own functions.
+
+## Before 
+
+To run any PowerShell script, Execution Policy should be set to RemoteSigned. Also, Scope should be set to Process to use Get-Help command for this script.
+Here is the command for doing those
+
+```
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+```
+
+To by-pass execution policy, read the Usage part.
 
 ## Usage
 
-This script is compatible Powershell 2.0 and higher versions. (This script is not tried at Powershell 1.0)
-**Get-DnsClientCache, Get-NetNeighbor and Get-Clipboard** functions are defined after Powershell 3.0. If the Powershell version is greater than or equal to 3, the script uses predefined Powershell functions. But if Powershell version is lower than 3, the script uses its own functions.
+Use "Get-Help" to see description and example in the host if the Scope is set Process.
 
-Run **main.ps1** as normal powershell script 
+```
+PS C:\Users\user> Get-Help.\main.ps1
+```
+
+Run **main.ps1** as a normal Powershell script 
 
 ```
 PS C:\Users\user> .\main.ps1
 ```
 
-You can by-pass execution policy with 
+To by-pass execution policy, use
 
 ```
-PS C:\Users\user> PowerShell.exe -ExecutionPolicy Bypass -File .\main.ps1
+PS C:\Users\user> PowerShell.exe -ExecutionPolicy Bypass -File .\main.ps1 
 ```
  
 ### All commands for download(clone) and run
